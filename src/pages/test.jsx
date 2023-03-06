@@ -37,7 +37,7 @@ function TestPage() {
           <Button size="large">{counterPersist}</Button>
         </Col>
       </Row>
-      {/* <Title>Contoh loading get api setiap mengunjungi ini akan loading</Title>
+      <Title>Contoh loading get api setiap mengunjungi ini akan loading</Title>
       {fecthing.data == "loading" ? (
         <Spin
           spinning
@@ -61,7 +61,7 @@ function TestPage() {
             </ul>
           );
         })
-      )} */}
+      )}
       <Title>Contoh get api secara langsung dari store</Title>
       {storeData?.length > 2 ? storeData.map((data, idx) => {
           return (
