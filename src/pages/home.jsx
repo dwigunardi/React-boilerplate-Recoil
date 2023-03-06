@@ -5,13 +5,14 @@ import {
   testSelector,
   themeState,
   validateAtom,
-} from "../../store/example";
+} from "../store/example";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { UseFetchLoading } from "../hooks/fetchLoading";
 function Home() {
   const [mounted, setMounted] = useState(false)
   const { Content } = Layout;
   const { Title } = Typography;
-  let data = useRecoilValue(testSelector) || null
+  let data = UseFetchLoading(testSelector) || null
   const [stateTheme, setStateTheme] = useRecoilState(themeState);
   const [stateValidate, setStateValidate] = useRecoilState(validateAtom);
   const [selectorState, setSelectorState] = useRecoilState(testSelector);
@@ -63,7 +64,7 @@ function Home() {
       <br />
       <Row justify={"center"} align="middle">
         <Col span={2}>
-          <Button onClick={() => setCounter((prev) => prev + 1)}>TamBah</Button>
+          <Button onClick={() => setCounter((prev) => prev + 1)}>Tambah</Button>
         </Col>
         <Col span={2}>
           <Button onClick={() => setCounter((prev) => prev - 1)}>Kurang</Button>

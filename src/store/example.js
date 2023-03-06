@@ -1,4 +1,4 @@
-import { appConfig } from "../config";
+import { appConfig } from "../config/appConfig";
 import axios from "axios";
 import { atom, selector, DefaultValue } from "recoil";
 
