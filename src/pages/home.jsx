@@ -8,6 +8,7 @@ import {
 } from "../store/example";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { UseFetchLoading } from "../hooks/fetchLoading";
+import { persistCounter } from "../store/persistExample";
 function Home() {
   const [mounted, setMounted] = useState(false)
   const { Content } = Layout;
@@ -17,6 +18,7 @@ function Home() {
   const [stateValidate, setStateValidate] = useRecoilState(validateAtom);
   const [selectorState, setSelectorState] = useRecoilState(testSelector);
   const [counter, setCounter] = useRecoilState(counterState);
+  const [counterPersist, setPersistCounter] = useRecoilState(persistCounter)
   const currentTheme = stateTheme == "dark" ? "#000" : "#fff";
   const contentStyle = {
     textAlign: "center",
@@ -76,6 +78,22 @@ function Home() {
         </Col>
       </Row>
       <Title style={{ color: "white" }}>{counter}</Title>
+      <br />
+      <Title style={{ color: "white" }}>Contoh Persist State</Title>
+      <Row justify={"center"} align="middle">
+        <Col span={2}>
+          <Button onClick={() => setPersistCounter((prev) => prev + 1)}>Tambah</Button>
+        </Col>
+        <Col span={2}>
+          <Button onClick={() => setPersistCounter((prev) => prev - 1)}>Kurang</Button>
+        </Col>
+        <Col span={2}>
+          <Button onClick={() => setPersistCounter((prev) => (prev = 0))}>
+            Reset
+          </Button>
+        </Col>
+      </Row>
+      <Title style={{ color: "white" }}>{counterPersist}</Title>
     </Content>
   );
 }
