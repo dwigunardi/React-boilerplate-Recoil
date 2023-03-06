@@ -7,15 +7,20 @@ import LoginPage from "../pages/login";
 import TestPage from "../pages/test";
 function MainRoute() {
   return (
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/test" element={<TestPage />} />
-        </Route>
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route path="/test" element={<TestPage />} />
+      </Route>
+      <Route path="/login" element={<LoginPage />} />
+    </Routes>
   );
 }
 

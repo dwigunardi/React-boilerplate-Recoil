@@ -7,13 +7,14 @@ import {
   validateAtom,
 } from "../store/example";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { UseFetchLoading } from "../hooks/fetchLoading";
 import { persistCounter } from "../store/persistExample";
+import MappedRow from "../components/dataDisplay/mappedRow";
+import FecthLoading from "../hooks/fetchLoading";
 function Home() {
   const [mounted, setMounted] = useState(false)
   const { Content } = Layout;
   const { Title } = Typography;
-  let data = UseFetchLoading(testSelector) || null
+  let data = useRecoilValue(testSelector) || null
   const [stateTheme, setStateTheme] = useRecoilState(themeState);
   const [stateValidate, setStateValidate] = useRecoilState(validateAtom);
   const [selectorState, setSelectorState] = useRecoilState(testSelector);
@@ -42,16 +43,7 @@ function Home() {
           >
             LOGOUT
           </Button>
-          {data.data.slice(0, 5).map((value, idx) => {
-            return (
-              <Row justify={"center"} align="middle" key={idx}>
-                <Col>
-                  <h1>{value.title}</h1>
-                  <p>{value.body}</p>
-                </Col>
-              </Row>
-            );
-          })}
+          <MappedRow data={data} />
         </div>
       ) : (
         <Typography.Text

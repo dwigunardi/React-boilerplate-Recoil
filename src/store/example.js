@@ -31,6 +31,14 @@ export const testSelector = selector({
   },
 });
 
+export const apiSelector = selector({
+  key: 'Api-data',
+  get: async ({get}) => {
+    const data = await axios.get(appConfig.apiUrl + '/users').then(res => res.data).catch(err => err)
+    return data
+  }
+})
+
 export const counterState = atom({
     key: 'Counter-state',
     default: 0,
