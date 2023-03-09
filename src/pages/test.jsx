@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Button, Layout, Row, Col, Typography, Spin } from "antd";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { apiSelector, counterState } from "../store/example";
@@ -20,7 +20,7 @@ function TestPage() {
     backgroundColor: "#108ee9",
   };
 
-  console.log(fecthing?.data?.user?.data, 'ini');
+  // console.log(fecthing?.data?.user?.data, 'ini');
   return (
     <Content style={contentStyle}>
       <Row justify={"center"}>
@@ -65,12 +65,14 @@ function TestPage() {
       <Title>Contoh get api secara langsung dari store</Title>
       {user?.data.length > 2 ? user.data.map((data, idx) => {
           return (
+            <Suspense fallback={<Spin />} >
             <ul key={idx} style={{ display: "flex" }}>
               <li style={{ marginRight: 50 }}>name : {data.name}</li>
               <li style={{ marginRight: 50 }}>username : {data.username}</li>
               <li style={{ marginRight: 50 }}>email: {data.email} </li>
               <li style={{ marginRight: 50 }}>address: {data.addres} </li>
             </ul>
+            </Suspense>
           );
         }): <p>Loading....</p>}
     </Content>
