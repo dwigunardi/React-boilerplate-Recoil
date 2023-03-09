@@ -28,6 +28,12 @@ function Header() {
           icon: <MailOutlined />,
           link: '/test'
         },
+        {
+          label: <Link to={'/testDua'}>Go to test page 2</Link>,
+          key: 'testDua',
+          icon: <MailOutlined />,
+          link: '/testDua'
+        },
         
       ];
   return (

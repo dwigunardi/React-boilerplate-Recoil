@@ -43,7 +43,7 @@ function Home() {
           >
             LOGOUT
           </Button>
-          <MappedRow data={data} />
+          <MappedRow data={data.data} mode='home' />
         </div>
       ) : (
         <Typography.Text

@@ -35,16 +35,27 @@ export const apiSelector = selector({
   key: 'Api-data',
   get: async ({get}) => {
     let user = [{
-      user: null,
+      user: 'kosong',
     }]
     try {
       let data = await axios.get(appConfig.apiUrl + '/users')
       user = {user: data}
     } catch (error) {
-      user = {user: error.message}
+      user = error
     }
    
     return user
+  }
+})
+export const getUserSelector = selector({
+  key: 'Get-user',
+  get: async () => {
+    try {
+      const response = await axios.get(appConfig.apiUrl + '/users')
+      return response.data
+    } catch (error) {
+      throw error
+    }
   }
 })
 

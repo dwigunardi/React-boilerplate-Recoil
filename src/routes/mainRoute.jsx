@@ -5,6 +5,7 @@ import Loading from "../components/loading";
 import Home from "../pages/home";
 import LoginPage from "../pages/login";
 import TestPage from "../pages/test";
+import TestDua from "../pages/test2";
 function MainRoute() {
   return (
     <Routes>
@@ -17,7 +18,8 @@ function MainRoute() {
             </Suspense>
           }
         />
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/test" element={<Suspense fallback={<Loading />}><TestPage /></Suspense>} />
+        <Route path="/testDua" element={<TestDua />} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
     </Routes>

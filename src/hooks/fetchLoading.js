@@ -13,10 +13,8 @@ const UseFetchLoadingApi = () => {
   // console.log(state)
   useEffect(() => {
     let unmounted = false;
-    console.log("sedang menjalankan fetching");
     if (state == 'hasValue') {
       setTimeout(() => {
-        console.log("Data mulai masuk");
         setData(contents);
       }, 500);
      

@@ -4,13 +4,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { apiSelector, counterState } from "../store/example";
 import { persistCounter } from "../store/persistExample";
 import UseFetchLoadingApi from "../hooks/fetchLoading";
+import MappedRow from "../components/dataDisplay/mappedRow";
 
 function TestPage() {
   const { Content } = Layout;
   const { Title } = Typography;
   const [counter, setCounter] = useRecoilState(counterState);
   const [counterPersist, setPersist] = useRecoilState(persistCounter);
-  const {user} = useRecoilValue(apiSelector)
+  const { user } = useRecoilValue(apiSelector);
   let fecthing = UseFetchLoadingApi();
   const contentStyle = {
     textAlign: "center",
@@ -20,7 +21,6 @@ function TestPage() {
     backgroundColor: "#108ee9",
   };
 
-  // console.log(fecthing?.data?.user?.data, 'ini');
   return (
     <Content style={contentStyle}>
       <Row justify={"center"}>
@@ -62,19 +62,28 @@ function TestPage() {
           );
         })
       )}
-      <Title>Contoh get api secara langsung dari store</Title>
-      {user?.data.length > 2 ? user.data.map((data, idx) => {
+      <Title>Contoh get api secara langsung dari store dengan suspense</Title>
+      <Suspense
+        fallback={
+          <Spin
+            spinning
+            size="large"
+            style={{ color: "white", backgroundColor: "white" }}
+          />
+        }
+      >
+        {/* {user.data.map((data, idx) => {
           return (
-            <Suspense fallback={<Spin />} >
             <ul key={idx} style={{ display: "flex" }}>
               <li style={{ marginRight: 50 }}>name : {data.name}</li>
               <li style={{ marginRight: 50 }}>username : {data.username}</li>
               <li style={{ marginRight: 50 }}>email: {data.email} </li>
               <li style={{ marginRight: 50 }}>address: {data.addres} </li>
             </ul>
-            </Suspense>
           );
-        }): <p>Loading....</p>}
+        })} */}
+        <MappedRow data={user.data} mode="testPage" />
+      </Suspense>
     </Content>
   );
 }
