@@ -10,7 +10,7 @@ function TestPage() {
   const { Title } = Typography;
   const [counter, setCounter] = useRecoilState(counterState);
   const [counterPersist, setPersist] = useRecoilState(persistCounter);
-  const storeData = useRecoilValue(apiSelector)
+  const {user} = useRecoilValue(apiSelector)
   let fecthing = UseFetchLoadingApi();
   const contentStyle = {
     textAlign: "center",
@@ -20,7 +20,7 @@ function TestPage() {
     backgroundColor: "#108ee9",
   };
 
-  console.log(storeData, 'ini');
+  console.log(fecthing?.data?.user?.data, 'ini');
   return (
     <Content style={contentStyle}>
       <Row justify={"center"}>
@@ -38,20 +38,20 @@ function TestPage() {
         </Col>
       </Row>
       <Title>Contoh loading get api setiap mengunjungi ini akan loading</Title>
-      {fecthing.data == "loading" ? (
+      {fecthing?.data == "loading" ? (
         <Spin
           spinning
           size="large"
           style={{ color: "white", backgroundColor: "white" }}
         />
-      ) : fecthing.data.length <= 1 ? (
+      ) : fecthing?.data.length <= 1 ? (
         <Spin
           spinning
           size="large"
           style={{ color: "white", backgroundColor: "white" }}
         />
       ) : (
-        fecthing?.data.map((data, idx) => {
+        fecthing?.data?.user?.data.map((data, idx) => {
           return (
             <ul key={idx} style={{ display: "flex" }}>
               <li style={{ marginRight: 50 }}>name : {data.name}</li>
@@ -63,7 +63,7 @@ function TestPage() {
         })
       )}
       <Title>Contoh get api secara langsung dari store</Title>
-      {storeData?.length > 2 ? storeData.map((data, idx) => {
+      {user?.data.length > 2 ? user.data.map((data, idx) => {
           return (
             <ul key={idx} style={{ display: "flex" }}>
               <li style={{ marginRight: 50 }}>name : {data.name}</li>
@@ -72,7 +72,7 @@ function TestPage() {
               <li style={{ marginRight: 50 }}>address: {data.addres} </li>
             </ul>
           );
-        }): null}
+        }): <p>Loading....</p>}
     </Content>
   );
 }

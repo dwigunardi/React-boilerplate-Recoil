@@ -34,8 +34,17 @@ export const testSelector = selector({
 export const apiSelector = selector({
   key: 'Api-data',
   get: async ({get}) => {
-    const data = await axios.get(appConfig.apiUrl + '/users').then(res => res.data).catch(err => err)
-    return data
+    let user = [{
+      user: null,
+    }]
+    try {
+      let data = await axios.get(appConfig.apiUrl + '/users')
+      user = {user: data}
+    } catch (error) {
+      user = {user: error.message}
+    }
+   
+    return user
   }
 })
 
